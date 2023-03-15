@@ -20,11 +20,12 @@ int main()
     cout<<"\n";
     if(Tree.Search(14)==Found)
     {
-        cout<<"Found";
+        cout<<"Found\n";
     }
     else
     {
-        cout<<"Not_Found";
+        cout<<"Not_Found\n";
     }
+    cout<<Tree.GetSize()<<"\n";
 
 }

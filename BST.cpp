@@ -7,8 +7,12 @@ namespace TreeSpace = DSA::DS::BINARY_TREE ; */
 template<typename T>
 Error_Code BST<T>::Insert(T Data)
 {
-    return Helper_Insert(this->pRoot , Data );
-    this->_Size++;
+    Error_Code Error_State = Helper_Insert(this->pRoot , Data );
+    if(Error_State == Success)
+    {
+        this->_Size++;
+    }
+    return Error_State ; 
 }
 template<typename T>
 Error_Code BST<T>::Helper_Insert(TreeNode_t<T> &pSubRoot , T Data)
@@ -74,24 +78,7 @@ Error_Code BST<T>::Delete(T Data)
 template<typename T>
 TreeNode_t<T> Helper_GetParent(TreeNode_t<T> &pSubRoot,TreeNode_t<T> &pChild )
 {
-    TreeNode_t<T> LocNode = nullptr ; 
-    while (pSubRoot != nullptr)
-    {
-         if(pSubRoot->Data == Data )
-         {
-            LocNode =  pSubRoot ; 
-            break;
  
-         }else if(Data > pSubRoot->Data )
-         {
-            pSubRoot = pSubRoot->pRight ; 
-         }
-         else if(Data < pSubRoot->Data )
-         {
-            pSubRoot = pSubRoot->pRight ; 
-         }
-    }
-    return LocNode ;
 }
 template<typename T>
 void BST<T>::Destroy(T Data)
