@@ -73,12 +73,44 @@ template<typename T>
 template<typename T>
 Error_Code BST<T>::Delete(T Data)
 {
+    return Success ; 
+}
 
+template<typename T>
+Error_Code BST<T>:: GetParent(T Data , T &Parent)
+{
+    Error_Code Error_State = Found ;
+    TreeNode_t<T> LocNode = Helper_GetParent(this->pRoot , Data) ; 
+    if(LocNode == nullptr){
+        Error_State  = Not_Found ; 
+    }
+    else{
+        Parent = LocNode->Data;
+    } 
+    return Error_State ; 
 }
 template<typename T>
-TreeNode_t<T> Helper_GetParent(TreeNode_t<T> &pSubRoot,TreeNode_t<T> &pChild )
-{
- 
+TreeNode_t<T> BST<T>:: Helper_GetParent(TreeNode_t<T> &pSubRoot,T &Data )
+{   
+    // you search for parent of root so it is root himself 
+    if(pSubRoot->Data = Data ){
+        return pSubRoot ; 
+    }
+    else if(pSubRoot->pLeft == nullptr && pSubRoot->pRight== nullptr ){
+        return nullptr ; 
+    }
+    else if ( (pSubRoot->pLeft  != nullptr && pSubRoot->pLeft->Data  == Data ) 
+          ||  (pSubRoot->pRight != nullptr && pSubRoot->pRight->Data == Data ) ){
+            return pSubRoot ;
+          }
+    else if(Data > pSubRoot->Data){
+        pSubRoot = pSubRoot->pRight ; 
+        Helper_GetParent(pSubRoot , Data);
+    }
+    else if(Data < pSubRoot->Data){
+        pSubRoot = pSubRoot->pLeft ; 
+        Helper_GetParent(pSubRoot , Data);
+    }       
 }
 template<typename T>
 void BST<T>::Destroy(T Data)

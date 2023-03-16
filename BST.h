@@ -21,11 +21,11 @@ class BST: public Binary_Tree<T>
         Error_Code Search(T Data);
         Error_Code Delete(T Data);
         void Destroy(T Data);
-
+        Error_Code GetParent(T Data , T &Parent);
     private:
         Error_Code Helper_Insert(TreeNode_t<T> &pSubRoot , T Data);
         TreeNode_t<T> Helper_Search(TreeNode_t<T> &pSubRoot , T Data);
-        TreeNode_t<T> Helper_GetParent(TreeNode_t<T> &pSubRoot,TreeNode_t<T> &pChild );
+        TreeNode_t<T> Helper_GetParent(TreeNode_t<T> &pSubRoot,T &Data);
 
     /* data */ 
 };

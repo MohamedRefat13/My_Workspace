@@ -33,7 +33,7 @@ uint16_t  Binary_Tree<T> :: GetSize() const
 template<typename T>
 uint16_t  Binary_Tree<T> :: GetHeight()const
 {
-
+    return 0 ;
 }
 
 template<typename T>

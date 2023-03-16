@@ -11,6 +11,7 @@ void Print(int &Data)
 int main()
 {
     BST<int> Tree ;
+    int parent = 0 ; 
     Tree.Insert(9);
     Tree.Insert(12);
     Tree.Insert(7);
@@ -18,14 +19,14 @@ int main()
     Tree.Insert(14);
     Tree.PreOrder(Print); 
     cout<<"\n";
-    if(Tree.Search(14)==Found)
+    if(Tree.GetParent(9 , parent )==Found)
     {
-        cout<<"Found\n";
+        cout<<parent<<"\n";
     }
     else
     {
         cout<<"Not_Found\n";
     }
-    cout<<Tree.GetSize()<<"\n";
+    cout<<"Size is : "<<Tree.GetSize()<<"\n";
 
 }
