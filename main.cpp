@@ -10,24 +10,33 @@ void Print(int &Data)
 
 int main()
 {
-    BST<int> Tree ;
-    Tree.Insert(30);
-    Tree.Insert(15);
-    Tree.Insert(45);
-    Tree.Insert(7);
-    Tree.Insert(17);
-    Tree.Insert(69);
-    Tree.Insert(80);
-    Tree.InOrder(Print); 
-    cout<<"\n";
-    cout<<"Done1\n";
-    if( Tree.Delete(45) == Success){
-        
-        Tree.InOrder(Print); 
-    }else{
-        cout<<"NotFound\n";
-    }
-    cout<<"\nSize is : "<<Tree.GetSize()<<"\n";
+BST<int> B;
+    B.Insert(100);
+    B.Insert(70);
+    B.Insert(50);
+    B.Insert(80);
+    B.Insert(130);
+    B.Insert(110);
+    B.Insert(140);
+    B.Insert(120);
+    B.Insert(115);
+    B.Insert(125);
+    B.Insert(75);
+    B.Insert(71);
+    B.Insert(77);
+    B.InOrder(Print);
+    std::cout<<"\n";
+    B.Delete(110);
+    B.InOrder(Print);
+    std::cout<<"\n";
+    B.Delete(80);
+    B.InOrder(Print);
+    std::cout<<"\n";
+    B.Delete(130);
+    B.InOrder(Print);
+    std::cout<<"\n";
+
+    cout<<"\nSize is : "<<B.GetSize()<<"\n";
 
 
 }

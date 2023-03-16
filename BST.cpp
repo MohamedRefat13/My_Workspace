@@ -65,7 +65,7 @@ template<typename T>
          }
          else if(Data < pSubRoot->Data )
          {
-            pSubRoot = pSubRoot->pRight ; 
+            pSubRoot = pSubRoot->pLeft ; 
          }
     }
     return LocNode ;
@@ -99,13 +99,14 @@ void  BST<T>:: Helper_Delete(TreeNode_t<T> &pDeletedNode)
     else if(pDeletedNode->pRight == nullptr && pDeletedNode->pLeft != nullptr)
     {
         TreeNode_t<T> IteratorNode = pDeletedNode ; 
+        TreeNode_t<T> pParentNode = nullptr;
         while(IteratorNode->pLeft !=nullptr ){
             Helper_Swap(IteratorNode , IteratorNode->pLeft);
+            pParentNode = IteratorNode;
             IteratorNode = IteratorNode->pLeft;
         }
-        TreeNode_t<T> pParentNode =  Helper_GetParent( IteratorNode->Data);
         pParentNode->pLeft = nullptr ;
-        delete pDeletedNode ; 
+        delete IteratorNode ; 
     
     }
 
@@ -113,14 +114,12 @@ void  BST<T>:: Helper_Delete(TreeNode_t<T> &pDeletedNode)
     else if(pDeletedNode->pLeft == nullptr && pDeletedNode->pRight != nullptr)
     {
         TreeNode_t<T> IteratorNode = pDeletedNode ; 
+        TreeNode_t<T> pParentNode = nullptr;
         while(IteratorNode->pRight !=nullptr){
             Helper_Swap(IteratorNode , IteratorNode->pRight );
+            pParentNode = IteratorNode;
             IteratorNode = IteratorNode->pRight;
         }
-        std::cout<<"pDeletedNode "<<IteratorNode->Data<<"\n";
-        TreeNode_t<T> pParentNode =  Helper_GetParent( IteratorNode->Data);
-        std::cout<<"pDeletedNode "<<IteratorNode->Data<<"\n";
-    
         pParentNode->pRight = nullptr ;
         delete IteratorNode ; 
     }
@@ -130,14 +129,25 @@ void  BST<T>:: Helper_Delete(TreeNode_t<T> &pDeletedNode)
         /* Go one step left the get most right node 
            swap pDeletedNode with the most right node then delete it  */
         TreeNode_t<T> IteratorNode = pDeletedNode->pLeft ; 
+        TreeNode_t<T> pParentNode = nullptr ; 
         while(IteratorNode->pRight){
+            pParentNode=IteratorNode;
             IteratorNode = IteratorNode->pRight ; 
         }
         Helper_Swap(IteratorNode , pDeletedNode);
-        TreeNode_t<T> pParentNode =  Helper_GetParent( pDeletedNode->Data);
-        if     (pParentNode->pLeft  == pDeletedNode )  pParentNode->pLeft   = nullptr ;
-        else if(pParentNode->pRight == pDeletedNode )  pParentNode->pRight  = nullptr ; 
-        delete pDeletedNode ; 
+        std::cout<<"Parent : \n"<<pParentNode->pLeft->Data<<"\n";
+        std::cout<<"Deleted : \n"<<IteratorNode->Data<<"\n";
+
+        if (pParentNode->pLeft->Data  == IteratorNode->Data ){
+            pParentNode->pLeft   = nullptr ;
+            std::cout<<"NO : \n";
+        }
+        else if(pParentNode->pRight->Data == IteratorNode->Data ) {
+            pParentNode->pRight  = nullptr ; 
+            std::cout<<"Yes : \n";
+        } 
+        
+        delete IteratorNode ; 
     }
 
 }
