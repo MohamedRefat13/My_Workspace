@@ -49,7 +49,7 @@ Error_Code BST<T>::Search(T Data)
     return Error_State ; 
 }
 template<typename T>
-/* TreeSpace:: */ TreeNode_t<T> BST<T>:: Helper_Search(TreeNode_t<T> &pSubRoot , T Data)
+/* TreeSpace:: */ TreeNode_t<T> BST<T>:: Helper_Search(TreeNode_t<T> pSubRoot , T Data)
 {
     TreeNode_t<T> LocNode = nullptr ; 
     while (pSubRoot != nullptr)
@@ -73,14 +73,79 @@ template<typename T>
 template<typename T>
 Error_Code BST<T>::Delete(T Data)
 {
-    return Success ; 
+    Error_Code  Error_State = Success; 
+    TreeNode_t<T> LocNode = Helper_Search(this->pRoot , Data);
+    if(LocNode != nullptr ){
+        Helper_Delete(LocNode );
+        this->_Size--;
+        
+    }else{
+        Error_State = Not_Found ; 
+    }
+    return Error_State ; 
 }
+template<typename T>
+void  BST<T>:: Helper_Delete(TreeNode_t<T> &pDeletedNode)
+{
+    //CASE I : Node is Leaf
+    if (pDeletedNode->pRight == nullptr && pDeletedNode->pLeft == nullptr ){
+        TreeNode_t<T> pParentNode = Helper_GetParent( pDeletedNode->Data);
+        if     (pParentNode->pLeft  == pDeletedNode )  pParentNode->pLeft   = nullptr ;
+        else if(pParentNode->pRight == pDeletedNode )  pParentNode->pRight  = nullptr ; 
+        delete pDeletedNode ; 
+    }
+    
+    //CASE II : Node has one Left child
+    else if(pDeletedNode->pRight == nullptr && pDeletedNode->pLeft != nullptr)
+    {
+        TreeNode_t<T> IteratorNode = pDeletedNode ; 
+        while(IteratorNode->pLeft !=nullptr ){
+            Helper_Swap(IteratorNode , IteratorNode->pLeft);
+            IteratorNode = IteratorNode->pLeft;
+        }
+        TreeNode_t<T> pParentNode =  Helper_GetParent( IteratorNode->Data);
+        pParentNode->pLeft = nullptr ;
+        delete pDeletedNode ; 
+    
+    }
 
+    //CASE III : Node has one Right child
+    else if(pDeletedNode->pLeft == nullptr && pDeletedNode->pRight != nullptr)
+    {
+        TreeNode_t<T> IteratorNode = pDeletedNode ; 
+        while(IteratorNode->pRight !=nullptr){
+            Helper_Swap(IteratorNode , IteratorNode->pRight );
+            IteratorNode = IteratorNode->pRight;
+        }
+        std::cout<<"pDeletedNode "<<IteratorNode->Data<<"\n";
+        TreeNode_t<T> pParentNode =  Helper_GetParent( IteratorNode->Data);
+        std::cout<<"pDeletedNode "<<IteratorNode->Data<<"\n";
+    
+        pParentNode->pRight = nullptr ;
+        delete IteratorNode ; 
+    }
+
+    //CASE IV : Node Has Two Child
+    else if(pDeletedNode->pLeft != nullptr && pDeletedNode->pRight != nullptr){
+        /* Go one step left the get most right node 
+           swap pDeletedNode with the most right node then delete it  */
+        TreeNode_t<T> IteratorNode = pDeletedNode->pLeft ; 
+        while(IteratorNode->pRight){
+            IteratorNode = IteratorNode->pRight ; 
+        }
+        Helper_Swap(IteratorNode , pDeletedNode);
+        TreeNode_t<T> pParentNode =  Helper_GetParent( pDeletedNode->Data);
+        if     (pParentNode->pLeft  == pDeletedNode )  pParentNode->pLeft   = nullptr ;
+        else if(pParentNode->pRight == pDeletedNode )  pParentNode->pRight  = nullptr ; 
+        delete pDeletedNode ; 
+    }
+
+}
 template<typename T>
 Error_Code BST<T>:: GetParent(T Data , T &Parent)
 {
     Error_Code Error_State = Found ;
-    TreeNode_t<T> LocNode = Helper_GetParent(this->pRoot , Data) ; 
+    TreeNode_t<T> LocNode = Helper_GetParent( Data) ; 
     if(LocNode == nullptr){
         Error_State  = Not_Found ; 
     }
@@ -90,10 +155,11 @@ Error_Code BST<T>:: GetParent(T Data , T &Parent)
     return Error_State ; 
 }
 template<typename T>
-TreeNode_t<T> BST<T>:: Helper_GetParent(TreeNode_t<T> &pSubRoot,T &Data )
+TreeNode_t<T> BST<T>:: Helper_GetParent(T Data )
 {   
     // you search for parent of root so it is root himself 
-    if(pSubRoot->Data = Data ){
+    TreeNode_t<T> pSubRoot = this->pRoot ; 
+    if(pSubRoot->Data == Data ){
         return pSubRoot ; 
     }
     else if(pSubRoot->pLeft == nullptr && pSubRoot->pRight== nullptr ){
@@ -105,12 +171,21 @@ TreeNode_t<T> BST<T>:: Helper_GetParent(TreeNode_t<T> &pSubRoot,T &Data )
           }
     else if(Data > pSubRoot->Data){
         pSubRoot = pSubRoot->pRight ; 
-        Helper_GetParent(pSubRoot , Data);
+        Helper_GetParent( Data);
     }
     else if(Data < pSubRoot->Data){
         pSubRoot = pSubRoot->pLeft ; 
-        Helper_GetParent(pSubRoot , Data);
-    }       
+        Helper_GetParent( Data);
+    }
+    return pSubRoot   ;      
+}
+
+template<typename T>
+void BST<T>:: Helper_Swap(TreeNode_t<T> &_1stNode , TreeNode_t<T> &_2ndNode)
+{
+    auto TempData  = _1stNode->Data ; 
+    _1stNode->Data = _2ndNode->Data;
+    _2ndNode->Data = TempData;
 }
 template<typename T>
 void BST<T>::Destroy(T Data)

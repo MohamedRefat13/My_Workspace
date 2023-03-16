@@ -10,8 +10,9 @@ struct Node_t
 {
     Node_t(T Val):Data(Val) , pLeft(nullptr) , pRight(nullptr) {}
     T Data ; 
-    Node_t<T> *pRight ; 
     Node_t<T> *pLeft ; 
+    Node_t<T> *pRight ; 
+    
 };
 
 template<typename T>

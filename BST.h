@@ -24,8 +24,10 @@ class BST: public Binary_Tree<T>
         Error_Code GetParent(T Data , T &Parent);
     private:
         Error_Code Helper_Insert(TreeNode_t<T> &pSubRoot , T Data);
-        TreeNode_t<T> Helper_Search(TreeNode_t<T> &pSubRoot , T Data);
-        TreeNode_t<T> Helper_GetParent(TreeNode_t<T> &pSubRoot,T &Data);
+        TreeNode_t<T> Helper_Search(TreeNode_t<T> pSubRoot , T Data);
+        TreeNode_t<T> Helper_GetParent(T Data);
+        void Helper_Delete( TreeNode_t<T> &pDeletedNode);
+        void Helper_Swap(TreeNode_t<T> &_1stNode , TreeNode_t<T> &_2ndNode);
 
     /* data */ 
 };

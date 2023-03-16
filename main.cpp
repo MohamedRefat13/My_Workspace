@@ -11,22 +11,23 @@ void Print(int &Data)
 int main()
 {
     BST<int> Tree ;
-    int parent = 0 ; 
-    Tree.Insert(9);
-    Tree.Insert(12);
+    Tree.Insert(30);
+    Tree.Insert(15);
+    Tree.Insert(45);
     Tree.Insert(7);
-    Tree.Insert(9);
-    Tree.Insert(14);
-    Tree.PreOrder(Print); 
+    Tree.Insert(17);
+    Tree.Insert(69);
+    Tree.Insert(80);
+    Tree.InOrder(Print); 
     cout<<"\n";
-    if(Tree.GetParent(9 , parent )==Found)
-    {
-        cout<<parent<<"\n";
+    cout<<"Done1\n";
+    if( Tree.Delete(45) == Success){
+        
+        Tree.InOrder(Print); 
+    }else{
+        cout<<"NotFound\n";
     }
-    else
-    {
-        cout<<"Not_Found\n";
-    }
-    cout<<"Size is : "<<Tree.GetSize()<<"\n";
+    cout<<"\nSize is : "<<Tree.GetSize()<<"\n";
+
 
 }
