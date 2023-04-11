@@ -1,16 +1,41 @@
 #include<iostream>
 #include"BinaryTree.h"
 #include"BST.h"
+#include"Sort.h"
 using namespace std ;
+void TreeTest(void);
+void Print(int &Data);
+
+int main()
+{
+
+ 	int Arr[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
+    cout<<"MERG_SORT ASCENDING:: \n";
+ 	Sort<int>::MergSort(Arr ,12, SortingType_t::ASCENDING );
+ 	for( int i : Arr)
+ 	{
+ 		cout<<i<<"\t";
+ 	}
+ 	cout<<"End"<<endl;
+    int Arr2[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
+    cout<<"MERG_SORT DESCENDING:: \n";
+ 	Sort<int>::MergSort(Arr2 ,12, SortingType_t::DESCENDING );
+ 	for( int i : Arr2)
+ 	{
+ 		cout<<i<<"\t";
+ 	}
+ 	cout<<"End"<<endl;
+
+ }
+
 void Print(int &Data)
 {
     cout<<Data<<"\t";
 }
 /* using namespace DSA::DS::BINARY_TREE::BST; */
-
-int main()
+void TreeTest(void)
 {
-BST<int> B;
+    BST<int> B;
     B.Insert(100);
     B.Insert(70);
     B.Insert(50);
@@ -37,6 +62,4 @@ BST<int> B;
     std::cout<<"\n";
 
     cout<<"\nSize is : "<<B.GetSize()<<"\n";
-
-
 }
