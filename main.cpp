@@ -9,18 +9,35 @@ void Print(int &Data);
 int main()
 {
 
- 	int Arr[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
-    cout<<"MERG_SORT ASCENDING:: \n";
- 	Sort<int>::MergSort(Arr ,12, SortingType_t::ASCENDING );
- 	for( int i : Arr)
+ 	uint32_t Arr[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
+    cout<<"Quick_Sort ASCENDING:: \n";
+    Sort<uint32_t>::QuickSort(Arr ,12, SortingType_t::ASCENDING );
+ 	for( uint32_t i : Arr)
  	{
  		cout<<i<<"\t";
  	}
  	cout<<"End"<<endl;
     int Arr2[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
-    cout<<"MERG_SORT DESCENDING:: \n";
- 	Sort<int>::MergSort(Arr2 ,12, SortingType_t::DESCENDING );
+    cout<<"QuickSort DESCENDING:: \n";
+ 	Sort<int>::QuickSort(Arr2 ,12, SortingType_t::DESCENDING );
  	for( int i : Arr2)
+ 	{
+ 		cout<<i<<"\t";
+ 	}
+ 	cout<<"End"<<endl;
+
+    uint32_t Arr3[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
+    cout<<"Merg_Sort ASCENDING:: \n";
+    Sort<uint32_t>::MergSort(Arr3 ,12, SortingType_t::ASCENDING );
+ 	for( uint32_t i : Arr3)
+ 	{
+ 		cout<<i<<"\t";
+ 	}
+ 	cout<<"End"<<endl;
+    int Arr4[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
+    cout<<"Merg_Sort DESCENDING:: \n";
+ 	Sort<int>::MergSort(Arr4 ,12, SortingType_t::DESCENDING );
+ 	for( int i : Arr4)
  	{
  		cout<<i<<"\t";
  	}
