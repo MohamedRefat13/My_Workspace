@@ -4,21 +4,30 @@
 #include"Sort.h"
 using namespace std ;
 void TreeTest(void);
+void SortTest(void);
 void Print(int &Data);
 
 int main()
 {
+   cout<<"SORTING TEST\n";
+   SortTest();
+   cout<<"TREE TEST\n";
+   TreeTest();
 
- 	uint32_t Arr[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
-    cout<<"Quick_Sort ASCENDING:: \n";
-    Sort<uint32_t>::QuickSort(Arr ,12, SortingType_t::ASCENDING );
+}
+
+void SortTest(void)
+{
+   uint32_t Arr[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
+   cout<<"Quick_Sort ASCENDING:: \n";
+   Sort<uint32_t>::QuickSort(Arr ,12, SortingType_t::ASCENDING );
  	for( uint32_t i : Arr)
  	{
  		cout<<i<<"\t";
  	}
  	cout<<"End"<<endl;
-    int Arr2[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
-    cout<<"QuickSort DESCENDING:: \n";
+   int Arr2[]   = {1,5,2,5,2,0,9,4,7,10,8,-9};
+   cout<<"QuickSort DESCENDING:: \n";
  	Sort<int>::QuickSort(Arr2 ,12, SortingType_t::DESCENDING );
  	for( int i : Arr2)
  	{
@@ -26,9 +35,9 @@ int main()
  	}
  	cout<<"End"<<endl;
 
-    uint32_t Arr3[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
-    cout<<"Merg_Sort ASCENDING:: \n";
-    Sort<uint32_t>::MergSort(Arr3 ,12, SortingType_t::ASCENDING );
+   uint32_t Arr3[]   = {1,5,2,5,2,0,9,4,7,10,8,9};
+   cout<<"Merg_Sort ASCENDING:: \n";
+   Sort<uint32_t>::MergSort(Arr3 ,12, SortingType_t::ASCENDING );
  	for( uint32_t i : Arr3)
  	{
  		cout<<i<<"\t";
@@ -42,9 +51,7 @@ int main()
  		cout<<i<<"\t";
  	}
  	cout<<"End"<<endl;
-
- }
-
+}
 void Print(int &Data)
 {
     cout<<Data<<"\t";

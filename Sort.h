@@ -32,7 +32,4 @@ static void Swap(T& First,T& Second);
 
 
 
-
-
-
 #endif /* _SORT_H_ */
