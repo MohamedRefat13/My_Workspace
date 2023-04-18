@@ -1,6 +1,6 @@
 #include <iostream>
 #include"BST.h"
-#include "utils.h"
+#include "../utils.h"
 /* using namespace DSA::DS::BINARY_TREE::BST;
 namespace TreeSpace = DSA::DS::BINARY_TREE ; */
 

@@ -1,6 +1,6 @@
 #include<iostream>
 #include"Sort.h"
-#include"utils.h"
+#include"../utils.h"
 
 
 template<typename T>

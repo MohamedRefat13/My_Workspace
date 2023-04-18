@@ -1,6 +1,6 @@
 #include <iostream>
 #include"BinaryTree.h"
-#include "utils.h"
+#include "../utils.h"
 
 /* using namespace DSA::DS::BINARY_TREE; */
 template<typename T>

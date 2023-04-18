@@ -1,18 +1,18 @@
-CC := g++
-CCFLAGS:= -fdiagnostics-color=always -g -Wall #-c 
-
-SOURCES  :=  $(wildcard *.cpp)
+CC      := g++
+CCFLAGS := -fdiagnostics-color=always -g -Wall #-c 
+TARGET  := main.exe
+SOURCES := $(wildcard *.cpp) $(wildcard SortinngAlgorithms/*.cpp) $(wildcard Tree/*.cpp)
 
 all:
-	@$(CC) $(CCFLAGS) $(SOURCES) -o main.exe
-	@./main.exe
+	@$(CC) $(CCFLAGS) $(SOURCES) -o $(TARGET)
+	@./$(TARGET)
 
 clean:
 	@echo CLEANING ..........
-	@rm -rf *.o
-	@rm -rf *.bin
-	@rm -rf *.exe
-	@rm -rf *.dot
+	@del *.o
+	@del *.bin
+	@del *.exe
+	@del *.dot
 	@echo DONE ..........
 
 help:

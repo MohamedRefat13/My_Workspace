@@ -1,7 +1,7 @@
 #include<iostream>
-#include"BinaryTree.h"
-#include"BST.h"
-#include"Sort.h"
+#include"Tree/BinaryTree.h"
+#include"Tree/BST.h"
+#include"SortinngAlgorithms/Sort.h"
 using namespace std ;
 void TreeTest(void);
 void SortTest(void);
