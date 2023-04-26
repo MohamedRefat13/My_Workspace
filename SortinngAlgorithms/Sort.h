@@ -19,15 +19,19 @@ template<typename T>
 class Sort 
 {
 public:
-static void QuickSort(T arr[], uint32_t size,
+static void QuickSort(T Arr[], uint32_t size,
+                        SortingType_t SortingType = SortingType_t::ASCENDING);
+static void QuickSort_v1(T Arr[], uint32_t size,
                         SortingType_t SortingType = SortingType_t::ASCENDING); 
 static void MergSort(T Arr[] , uint32_t size , 
                         SortingType_t SortingType = SortingType_t::ASCENDING);                          
 
 private:
-static void Helper_QuickSort(T Array[] , uint32_t Fisrt_Idx , uint32_t Last_Idx , SortingType_t SortingType);
+static void Helper_QuickSort(T Arr[] , int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType);
+static uint32_t  Helper_Partition(T Arr[] ,  int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType);
+static void Helper_QuickSort_v1(T Arr[] , int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType);
 static void Helper_MergSort (MergSortSubArrays<T> SubArrays  , T SortedArr[] , uint32_t size ,SortingType_t SortingType );
-static void Swap(T& First,T& Second);
+static void Swap(T *a, T *b);
 };
 
 

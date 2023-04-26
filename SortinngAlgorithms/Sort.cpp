@@ -1,79 +1,46 @@
 #include<iostream>
 #include"Sort.h"
 #include"../utils.h"
-
-
+/* Quick Sort Implementaion */
 template<typename T>
-void Sort<T>::QuickSort(T arr[], uint32_t size, SortingType_t SortingType )
+void Sort<T>::QuickSort(T Arr[], uint32_t size, SortingType_t SortingType )
 {
-    Helper_QuickSort(arr ,  0 , size-1 , SortingType);
+    Helper_QuickSort(Arr , 0 , size-1 , SortingType );
 }
 template<typename T>
-void Sort<T>::Helper_QuickSort(T Array[] , uint32_t Fisrt_Idx , uint32_t Last_Idx , SortingType_t SortingType)
+void Sort<T>:: Helper_QuickSort(T Arr[] , int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType)
 {
-
-    uint32_t Pivot_idx    = Fisrt_Idx ;
-    uint32_t Iterator     = 0 ;
-    uint32_t Start_Idx    = Fisrt_Idx ;
-    uint32_t End_Idx      = Last_Idx ; 
-    uint8_t  Pivot_State  = PIVOT_AT_LEFT ; 
-
-    /* Base case for recursion :
-      --> Array has one element  
-    */
+    // Base case
     if(Fisrt_Idx >= Last_Idx ){
-      return ;
+        return;
     }
 
-    for(Iterator=Fisrt_Idx ; Iterator <Last_Idx ; Iterator++){
-
+    uint32_t Pivot_Idx = Helper_Partition(Arr ,  Fisrt_Idx ,  Last_Idx ,  SortingType);
+    Helper_QuickSort(Arr , Fisrt_Idx , Pivot_Idx-1 , SortingType);
+    Helper_QuickSort(Arr , Pivot_Idx+1 , Last_Idx , SortingType);
+}
+template<typename T>
+ uint32_t Sort<T>:: Helper_Partition(T Arr[] ,  int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType)
+{
+    T Pivot = Arr[Last_Idx];
+    int32_t _1stIterator = (Fisrt_Idx-1);
+    int32_t _2ndtIterator;
+    for(_2ndtIterator = Fisrt_Idx ; _2ndtIterator < Last_Idx ; _2ndtIterator++ ){
         if(SortingType == SortingType_t::ASCENDING){
-
-            if(Pivot_State  == PIVOT_AT_LEFT && Array[Pivot_idx]>Array[End_Idx] ){
-                Swap(Array[Pivot_idx], Array[End_Idx]);
-                Start_Idx++ ; 
-                Pivot_idx = End_Idx ; 
-                Pivot_State  = PIVOT_AT_RIGHT;
-
-            }else if(Pivot_State  == PIVOT_AT_RIGHT && Array[Start_Idx]>Array[Pivot_idx] ){
-                Swap(Array[Start_Idx],Array[End_Idx]);
-                End_Idx-- ; 
-                Pivot_idx = Start_Idx ; 
-                Pivot_State  = PIVOT_AT_LEFT;
-
-            }else{
-              if(Pivot_State  == PIVOT_AT_LEFT ){
-                End_Idx-- ; 
-              }else if(Pivot_State  == PIVOT_AT_RIGHT ){
-                Start_Idx++ ; 
-              }
+            if(Arr[_2ndtIterator] <= Pivot){
+                _1stIterator++;
+                Swap(& Arr[_1stIterator], &Arr[_2ndtIterator]);
             }
         }else if(SortingType == SortingType_t::DESCENDING){
-            
-            if(Pivot_State  == PIVOT_AT_LEFT && Array[Pivot_idx] < Array[End_Idx] ){
-                Swap(Array[Pivot_idx], Array[End_Idx]);
-                Start_Idx++ ; 
-                Pivot_idx = End_Idx ; 
-                Pivot_State  = PIVOT_AT_RIGHT;
-
-            }else if(Pivot_State  == PIVOT_AT_RIGHT && Array[Start_Idx] < Array[Pivot_idx] ){
-                Swap(Array[Start_Idx],Array[End_Idx]);
-                End_Idx-- ; 
-                Pivot_idx = Start_Idx ; 
-                Pivot_State  = PIVOT_AT_LEFT;
-
-            }else{
-              if(Pivot_State  == PIVOT_AT_LEFT ){
-                End_Idx-- ; 
-              }else if(Pivot_State  == PIVOT_AT_RIGHT ){
-                Start_Idx++ ; 
-              }
+            if(Arr[_2ndtIterator] >= Pivot){
+                _1stIterator++;
+                Swap(& Arr[_1stIterator], &Arr[_2ndtIterator]);
             }
         }
-
     }
-    Helper_QuickSort(Array , Fisrt_Idx   , Pivot_idx-1 , SortingType);    //Pass Left  Sup Array of Pivot to Quick Sort fun
-    Helper_QuickSort(Array , Pivot_idx+1 , Last_Idx    , SortingType );   //Pass Right Sup Array of Pivot  to Quick Sort fun
+    Swap(&Arr[_1stIterator+1],&Arr[Last_Idx]);
+    //return Pivot index 
+    return (_1stIterator+1);
 }
 
 template<typename T>
@@ -142,12 +109,84 @@ void Sort<T>:: Helper_MergSort (MergSortSubArrays<T> SubArrays ,  T SortedArr[] 
         SortedArr[_3rdIrerator++]=SubArrays._pRightdArr[_2ndIrerator++];
     }
 }
+/* QuickSort Old Version */
 template<typename T>
-void Sort<T>::Swap(T& First,T& Second)
+void Sort<T>::QuickSort_v1(T Arr[], uint32_t size, SortingType_t SortingType )
 {
-    First  = First + Second;
-    Second = First - Second;
-    First  = First - Second;
+    Helper_QuickSort_v1(Arr ,  0 , size-1 , SortingType);
 }
+template<typename T>
+void Sort<T>::Helper_QuickSort_v1(T Arr[] , int32_t Fisrt_Idx , int32_t Last_Idx , SortingType_t SortingType)
+{
 
+    int32_t Pivot_idx    = Fisrt_Idx ;
+    int32_t Iterator     = 0 ;
+    int32_t Start_Idx    = Fisrt_Idx ;
+    int32_t End_Idx      = Last_Idx ; 
+    uint8_t  Pivot_State  = PIVOT_AT_LEFT ; 
+
+    /* Base case for recursion :
+      --> Arr has one element  
+    */
+    if(Fisrt_Idx >= Last_Idx ){
+      return ;
+    }
+
+    for(Iterator=Fisrt_Idx ; Iterator <Last_Idx ; Iterator++){
+
+        if(SortingType == SortingType_t::ASCENDING){
+
+            if(Pivot_State  == PIVOT_AT_LEFT && Arr[Pivot_idx]>Arr[End_Idx] ){
+                Swap(&Arr[Pivot_idx],& Arr[End_Idx]);
+                Start_Idx++ ; 
+                Pivot_idx = End_Idx ; 
+                Pivot_State  = PIVOT_AT_RIGHT;
+
+            }else if(Pivot_State  == PIVOT_AT_RIGHT && Arr[Start_Idx]>Arr[Pivot_idx] ){
+                Swap(&Arr[Start_Idx],&Arr[End_Idx]);
+                End_Idx-- ; 
+                Pivot_idx = Start_Idx ; 
+                Pivot_State  = PIVOT_AT_LEFT;
+
+            }else{
+              if(Pivot_State  == PIVOT_AT_LEFT ){
+                End_Idx-- ; 
+              }else if(Pivot_State  == PIVOT_AT_RIGHT ){
+                Start_Idx++ ; 
+              }
+            }
+        }else if(SortingType == SortingType_t::DESCENDING){
+            
+            if(Pivot_State  == PIVOT_AT_LEFT && Arr[Pivot_idx] < Arr[End_Idx] ){
+                Swap(&Arr[Pivot_idx], &Arr[End_Idx]);
+                Start_Idx++ ; 
+                Pivot_idx = End_Idx ; 
+                Pivot_State  = PIVOT_AT_RIGHT;
+
+            }else if(Pivot_State  == PIVOT_AT_RIGHT && Arr[Start_Idx] < Arr[Pivot_idx] ){
+                Swap(&Arr[Start_Idx],&Arr[End_Idx]);
+                End_Idx-- ; 
+                Pivot_idx = Start_Idx ; 
+                Pivot_State  = PIVOT_AT_LEFT;
+
+            }else{
+              if(Pivot_State  == PIVOT_AT_LEFT ){
+                End_Idx-- ; 
+              }else if(Pivot_State  == PIVOT_AT_RIGHT ){
+                Start_Idx++ ; 
+              }
+            }
+        }
+
+    }
+    Helper_QuickSort_v1(Arr , Fisrt_Idx   , Pivot_idx-1 , SortingType);    //Pass Left  Sup Arr of Pivot to Quick Sort fun
+    Helper_QuickSort_v1(Arr , Pivot_idx+1 , Last_Idx    , SortingType );   //Pass Right Sup Arr of Pivot  to Quick Sort fun
+}
+template<typename T>
+void Sort<T>:: Swap(T *a, T *b) {
+  T t = *a;
+  *a = *b;
+  *b = t;
+}
 INSTANTIATE_CLASS_TEMPLATES(Sort);
+
